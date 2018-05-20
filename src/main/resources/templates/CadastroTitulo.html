@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de título</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/myCss.css" />
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<img alt="AlgaWorks" src="/images/logo-algaworks.png" />
+				</a>
+			</div>
+		</div>	
+	</nav>
+	
+	<form class="form-horizontal" method="POST" action="/titulos">
+		<div class="card new-card">
+			<div class="card-header">
+				<h3 class="card-title">Novo título</h3>			
+			</div>
+			<div class="card-body">
+				<div class="form-group row">
+				   <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
+				   <div class="col-sm-4">
+				   		<input type="text" class="form-control" id="descricao" name="descricao"/>
+				   </div>				   
+				</div>
+				
+				<div class="form-group row">
+				   <label class="col-sm-2 col-form-label" for="dataVencimento">Data de vencimento</label>
+				   <div class="col-sm-2">
+				   		<input type="text" class="form-control" id="dataVencimento" name="dataVencimento"/>
+				   </div>				   
+				</div>
+				
+				<div class="form-group row">
+				   <label class="col-sm-2 col-form-label" for="valor">Valor</label>
+				   <div class="col-sm-2">
+				   		<input type="text" class="form-control" id="valor" name="valor"/>
+				   </div>				   
+				</div>
+				
+				<div class="form-group row">
+				   <label class="col-sm-2 col-form-label" for="status">Status</label>
+				   <div class="col-sm-2">
+				   		<select class="form-control" id="status" name="status">
+				   			<option value="PENDENTE">Pendente</option>
+				   			<option value="RECEBIDO">Recebido</option>
+				   		</select>
+				   </div>				   
+				</div>
+				
+				<div class="form-group row">
+				   <div class="offset-2 col-sm-10">
+				   		<button class="btn btn-primary" type="submit">Salvar</button>
+				   </div>
+				   				   
+				</div>
+				
+			</div>
+		</div>
+	</form>
+<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
