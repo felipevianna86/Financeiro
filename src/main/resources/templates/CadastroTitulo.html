@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"	>
 <head>
 <meta charset="UTF-8" />
 <title>Cadastro de título</title>
@@ -18,6 +19,10 @@
 	</nav>
 	
 	<form class="form-horizontal" method="POST" action="/titulos">
+	
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			<span th:text="${mensagem}">Título salvo!</span>			
+		</div>
 		<div class="card new-card">
 			<div class="card-header">
 				<h3 class="card-title">Novo título</h3>			
