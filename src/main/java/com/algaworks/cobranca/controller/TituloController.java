@@ -45,4 +45,12 @@ public class TituloController {
 	public List<StatusTitulo> statusTitulo(){
 		return Arrays.asList(StatusTitulo.values());
 	}
+	
+	/***
+	 * Página default do sistema.
+	 */
+	@RequestMapping
+	public String pesquisar() {
+		return "PesquisaTitulos";
+	}
 }
