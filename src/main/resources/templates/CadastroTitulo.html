@@ -1,23 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"	>
+	xmlns:th="http://www.thymeleaf.org"	
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 <head>
-<meta charset="UTF-8" />
+
 <title>Cadastro de título</title>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/myCss.css" />
 </head>
-<body>
-	<nav class="navbar navbar-dark bg-dark">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">
-					<img alt="AlgaWorks" src="/images/logo-algaworks.png" />
-				</a>
-			</div>
-		</div>	
-	</nav>
-	
+<section layout:fragment="conteudo">
 	<form class="form-horizontal" method="POST" action="/titulos">
 	
 		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
@@ -25,7 +15,8 @@
 		</div>
 		<div class="card new-card">
 			<div class="card-header">
-				<h3 class="card-title">Novo título</h3>			
+				<h3 class="card-title title-panel">Novo título</h3>	
+				<a class="btn btn-link link-panel" href="/titulos">Títulos</a>			
 			</div>
 			<div class="card-body">
 				<div class="form-group row">
@@ -69,7 +60,5 @@
 			</div>
 		</div>
 	</form>
-	<script src="/js/jquery-3.3.1.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-</body>
+</section>
 </html>
