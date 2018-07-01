@@ -17,7 +17,7 @@ import com.algaworks.cobranca.repository.Titulos;
 @Controller
 @RequestMapping("/titulos")
 public class TituloController {
-	
+	//Injeção de dependência
 	@Autowired
 	private Titulos titulos;
 	
@@ -48,9 +48,13 @@ public class TituloController {
 	
 	/***
 	 * Página default do sistema.
+	 * Pesquisa de títulos
 	 */
 	@RequestMapping
-	public String pesquisar() {
-		return "PesquisaTitulos";
+	public ModelAndView pesquisar() {
+		List<Titulo> todostitulos = titulos.findAll();
+		ModelAndView model = new ModelAndView("PesquisaTitulos");
+		model.addObject("titulos", todostitulos);
+		return model;
 	}
 }
