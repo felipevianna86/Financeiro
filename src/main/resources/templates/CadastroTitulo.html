@@ -8,11 +8,10 @@
 <title>Cadastro de título</title>
 </head>
 <section layout:fragment="conteudo">
-	<form class="form-horizontal" method="POST" action="/titulos">
+	<form class="form-horizontal" method="POST" action="/titulos" th:object="${titulo}">
 	
-		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
-			<span th:text="${mensagem}">Título salvo!</span>			
-		</div>
+		<div layout:include="Mensagens" ></div>
+		
 		<div class="card new-card">
 			<div class="card-header">
 				<h3 class="card-title title-panel">Novo título</h3>	
@@ -22,21 +21,24 @@
 				<div class="form-group row">
 				   <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
 				   <div class="col-sm-4">
-				   		<input type="text" class="form-control" id="descricao" name="descricao"/>
+				   		<input type="text" class="form-control" id="descricao" name="descricao"
+				   		th:classappend="${#fields.hasErrors('descricao')} ? invalid"/>
 				   </div>				   
 				</div>
 				
 				<div class="form-group row">
 				   <label class="col-sm-2 col-form-label" for="dataVencimento">Data de vencimento</label>
 				   <div class="col-sm-2">
-				   		<input type="text" class="form-control" id="dataVencimento" name="dataVencimento"/>
+				   		<input type="text" class="form-control" id="dataVencimento" name="dataVencimento"
+				   		th:classappend="${#fields.hasErrors('dataVencimento')} ? invalid"/>
 				   </div>				   
 				</div>
 				
-				<div class="form-group row">
-				   <label class="col-sm-2 col-form-label" for="valor">Valor</label>
+				<div class="form-group row" >
+				   <label class="col-sm-2 col-form-label" for="valor" >Valor</label>
 				   <div class="col-sm-2">
-				   		<input type="text" class="form-control" id="valor" name="valor"/>
+				   		<input type="text" class="form-control" id="valor" name="valor" 
+				   		th:classappend="${#fields.hasErrors('valor')} ? invalid"/>
 				   </div>				   
 				</div>
 				
