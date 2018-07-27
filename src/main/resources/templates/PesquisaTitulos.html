@@ -18,9 +18,9 @@
 				<thead>
 					<tr>
 						<th class="text-center col-md-1">#</th>
-						<th>Descrição</th>
+						<th class="text-center">Descrição</th>
 						<th class="text-center col-md-2">Data de vencimento</th>
-						<th class="text-right col-md-2">Valor</th>
+						<th class="text-center col-md-2">Valor</th>
 						<th class="text-center col-md-2">Status</th>
 						<th class="col-md-1"></th>
 					</tr>
@@ -29,14 +29,18 @@
 					<tr th:each="titulo : ${titulos}">
 						<td class="text-center" th:text="${titulo.codigo}"> </td>
 						<td class="text-center" th:text="${titulo.descricao}"> </td>
-						<td class="text-right" th:text="${{titulo.dataVencimento}}"> </td>
+						<td class="text-center" th:text="${{titulo.dataVencimento}}"> </td>
 						<td class="text-center" th:text="|R$ ${{titulo.valor}}|"> </td>
 						<td class="text-center"> 
 							<span class="p-1 mb-1 text-white" th:text="${titulo.status.descricao}"
 							
 							th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"></span>
 						</td>
-						<td class="text-center"> </td>
+						<td class="text-center">
+							<a class="btn btn-link btn-sm" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"> 
+								<span class="fa fa-pencil-alt"></span>
+							</a>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(titulos)}">Nenhum título foi encontrado</td>

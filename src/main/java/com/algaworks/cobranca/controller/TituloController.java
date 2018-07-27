@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,8 @@ public class TituloController {
 	@Autowired
 	private Titulos titulos;
 	
+	private static final String CADASTRO_VIEW = "CadastroTitulo";
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView model = new ModelAndView("CadastroTitulo");
@@ -34,13 +37,26 @@ public class TituloController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String Salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {		
 		if(errors.hasErrors()) {
-			return "CadastroTitulo";
+			return CADASTRO_VIEW;
 		}
 		
 		titulos.save(titulo);
 		
 		attributes.addFlashAttribute("mensagem", "Operação realizada com sucesso!");		
 		return "redirect:/titulos/novo";
+	}
+	
+	/**
+	 * Método criado pra editar um título. Utilizando benefícios do JPARepository
+	 * @param titulo
+	 * @return
+	 */
+	@RequestMapping("{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Titulo titulo) {		
+		ModelAndView model = new ModelAndView(CADASTRO_VIEW);
+		model.addObject(titulo);
+		
+		return model;
 	}
 	
 	/***
