@@ -3,7 +3,8 @@
 	xmlns:th="http://www.thymeleaf.org"	
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="LayoutPadrao">
-<head>	
+	
+<head>
 	<title>Pesquisa de título</title>
 </head>
 <section layout:fragment="conteudo">
@@ -37,9 +38,12 @@
 							th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"></span>
 						</td>
 						<td class="text-center">
-							<a class="btn btn-link btn-sm" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"> 
+							<a class="btn btn-link btn-sm" title="Editar Cobrança" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"> 
 								<span class="fa fa-pencil-alt"></span>
 							</a>
+							<a class="btn btn-link btn-sm" data-toggle="modal" data-target="#confirmacaoExclusaoModal" > 
+								<span class="fa fa-trash-alt"></span>
+							</a>							
 						</td>
 					</tr>
 					<tr>
@@ -49,6 +53,8 @@
 				</tbody>
 			</table>
 		</div>	
+		
+		<div layout:include="DialogoConfirmacaoExclusao"> </div>
 	</div>
 </section>
 </html>
