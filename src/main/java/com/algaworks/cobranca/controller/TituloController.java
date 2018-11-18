@@ -80,4 +80,18 @@ public class TituloController {
 		model.addObject("titulos", todostitulos);
 		return model;
 	}
+	
+	/**
+	 * Método responsável por excluir um título.
+	 * @param codigo
+	 * @param attributes
+	 * @return
+	 */
+	@RequestMapping(value="{codigo}", method= RequestMethod.DELETE) 
+	public String excluir (@PathVariable Long codigo, RedirectAttributes attributes) {
+		titulos.delete(codigo);
+		
+		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		return "redirect:/titulos";
+	}
 }

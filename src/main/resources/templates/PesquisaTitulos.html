@@ -8,13 +8,18 @@
 	<title>Pesquisa de título</title>
 </head>
 <section layout:fragment="conteudo">
-	<div class="card new-card">
-		<div class="card-header">
-			<h3 class="card-title title-panel">Pesquisa de títulos</h3>	
-			<a class="btn btn-link link-panel" href="/titulos/novo">Novo título</a>		
+
+	<div layout:include="MensagemSucesso" ></div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h3 class="panel-title title-panel">Pesquisa de títulos</h3>	
+				<a class="btn btn-link link-panel" href="/titulos/novo">Novo título</a>		
+			</div>
 		</div>
-		
-		<div class="card-body">
+				
+		<div class="panel-body">
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
@@ -33,15 +38,16 @@
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"> </td>
 						<td class="text-center" th:text="|R$ ${{titulo.valor}}|"> </td>
 						<td class="text-center"> 
-							<span class="p-1 mb-1 text-white" th:text="${titulo.status.descricao}"
+							<span class="label" th:text="${titulo.status.descricao}"
 							
-							th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"></span>
+							th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
 						</td>
 						<td class="text-center">
 							<a class="btn btn-link btn-sm" title="Editar Cobrança" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"> 
 								<span class="fa fa-pencil-alt"></span>
 							</a>
-							<a class="btn btn-link btn-sm" data-toggle="modal" data-target="#confirmacaoExclusaoModal" > 
+							<a class="btn btn-link btn-sm" data-toggle="modal" data-target="#confirmacaoExclusaoModal" 
+							 th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}"> 
 								<span class="fa fa-trash-alt"></span>
 							</a>							
 						</td>
