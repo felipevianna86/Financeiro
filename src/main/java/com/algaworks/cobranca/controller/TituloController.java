@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +17,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.algaworks.cobranca.model.StatusTitulo;
 import com.algaworks.cobranca.model.Titulo;
 import com.algaworks.cobranca.repository.Titulos;
+import com.algaworks.cobranca.service.CadastroTituloService;
+
+/**
+ * Controlador responsável por ações referentes à classe Título.
+ * @author felipe
+ *
+ */
 
 @Controller
 @RequestMapping("/titulos")
@@ -26,8 +32,15 @@ public class TituloController {
 	@Autowired
 	private Titulos titulos;
 	
+	@Autowired
+	private CadastroTituloService titulosService;
+	
 	private static final String CADASTRO_VIEW = "CadastroTitulo";
 	
+	/**
+	 * Método que inicializa o cadastro de um título
+	 * @return
+	 */
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView model = new ModelAndView("CadastroTitulo");
@@ -35,6 +48,13 @@ public class TituloController {
 		return model;
 	}
 	
+	/**
+	 * Método responsável por salvar um título.
+	 * @param titulo
+	 * @param errors
+	 * @param attributes
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public String Salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes attributes) {		
 		if(errors.hasErrors()) {
@@ -43,12 +63,12 @@ public class TituloController {
 		
 		try {			
 		
-			titulos.save(titulo);
+			titulosService.salvar(titulo);
 			
 			attributes.addFlashAttribute("mensagem", "Operação realizada com sucesso!");		
 			return "redirect:/titulos/novo";
-		} catch (DataIntegrityViolationException e) {
-			errors.reject("dataVencimento", null, "Formato de data inválido!");
+		} catch (IllegalArgumentException e) {
+			errors.reject("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;
 		}
 	}
@@ -96,7 +116,7 @@ public class TituloController {
 	 */
 	@RequestMapping(value="{codigo}", method= RequestMethod.DELETE) 
 	public String excluir (@PathVariable Long codigo, RedirectAttributes attributes) {
-		titulos.delete(codigo);
+		titulosService.excluir(codigo);
 		
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/titulos";

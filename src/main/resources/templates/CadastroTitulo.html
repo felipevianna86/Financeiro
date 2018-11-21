@@ -43,8 +43,10 @@
 				<div class="form-group" >
 				   <label class="col-sm-2 control-label" for="valor" >Valor</label>
 				   <div class="col-sm-2">
-				   		<input type="text" class="form-control" id="valor" th:field="*{valor}" 
-				   		th:classappend="${#fields.hasErrors('valor')} ? invalid"/>
+				   		<input type="text" class="form-control js-currency" id="valor" th:field="*{valor}" 
+				   		th:classappend="${#fields.hasErrors('valor')} ? invalid"
+				   		
+				   		/>
 				   </div>				   
 				</div>
 				
