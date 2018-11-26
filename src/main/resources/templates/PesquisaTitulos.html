@@ -27,8 +27,8 @@
 						<th class="text-center">Descrição</th>
 						<th class="text-center col-md-2">Data de vencimento</th>
 						<th class="text-center col-md-2">Valor</th>
-						<th class="text-center col-md-2">Status</th>
-						<th class="col-md-1"></th>
+						<th class="text-center col-md-1">Status</th>
+						<th class="col-md-2"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,7 +37,7 @@
 						<td class="text-center" th:text="${titulo.descricao}"> </td>
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"> </td>
 						<td class="text-center" th:text="|R$ ${{titulo.valor}}|"> </td>
-						<td class="text-center"> 
+						<td class="text-center" th:attr="data-role=${titulo.codigo}"> 
 							<span class="label" th:text="${titulo.status.descricao}"
 							
 							th:classappend="${titulo.pendente ? 'label-danger' : 'label-success'}"></span>
@@ -51,6 +51,13 @@
 							 th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}"
 							 title="Excluir" rel="tooltip" data-placement="top" > 
 								<span class="fa fa-trash-alt"></span>
+							</a>
+							<a class="btn btn-link btn-sm js-atualizar-status" title="Receber"
+							 th:if="${titulo.pendente}"	
+							 th:attr="data-codigo=${titulo.codigo}"
+							 th:href="@{/titulos/{codigo}/receber(codigo=${titulo.codigo})}"
+							rel="tooltip" data-placement="top" > 
+								<span class="fa fa-check-circle"></span>
 							</a>							
 						</td>
 					</tr>
